@@ -26,8 +26,15 @@ export default function Register() {
       return;
     }
 
-    if (password.length < 6) {
-      setError("Password minimal 6 karakter.");
+    const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+    if (!usernameRegex.test(username)) {
+      setError("Username harus 3-20 karakter dan hanya boleh berisi huruf, angka, atau underscore.");
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,}$/;
+    if (!passwordRegex.test(password)) {
+      setError("Password minimal 10 karakter dan harus mengandung huruf besar, huruf kecil, angka, dan karakter spesial.");
       return;
     }
 

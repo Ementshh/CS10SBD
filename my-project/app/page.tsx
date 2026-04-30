@@ -15,7 +15,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchItems = async () => {

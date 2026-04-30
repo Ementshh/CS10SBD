@@ -1,12 +1,23 @@
 const { Pool } = require('pg');
 
-const pool = new Pool({
+const poolConfig = process.env.POSTGRES_URL ? {
+  // Jika menggunakan Vercel Postgres (Storage)
+  connectionString: process.env.POSTGRES_URL,
+} : process.env.DATABASE_URL ? {
+  // Fallback jika menggunakan DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+} : {
+  // Untuk Local Development
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
-});
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+};
+
+const pool = new Pool(poolConfig);
 
 pool.on('connect', () => {
   console.log('Connected to PostgreSQL database');

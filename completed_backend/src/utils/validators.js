@@ -2,7 +2,7 @@ const { body, param, query } = require('express-validator');
 
 // Regex patterns
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{10,}$/;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,}$/;
 const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/; // huruf, angka, underscore, 3-20 karakter
 const phoneRegex = /^\+?[\d\s-]{10,}$/; // basic phone validation
 const descriptionRegex = /^.{0,500}$/; // opsional, maks 500 karakter

@@ -1,14 +1,12 @@
 const { Pool } = require('pg');
 
 const poolConfig = process.env.POSTGRES_URL ? {
-  // Jika menggunakan Vercel Postgres (Storage)
   connectionString: process.env.POSTGRES_URL,
+  ssl: { rejectUnauthorized: false }
 } : process.env.DATABASE_URL ? {
-  // Fallback jika menggunakan DATABASE_URL
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 } : {
-  // Untuk Local Development
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,

@@ -10,6 +10,11 @@ class UserService {
     if (existingUserByEmail) {
       throw new AppError('User with this email already exists', 400);
     }
+
+    const existingUserByUsername = await User.findByUsername(username);
+    if (existingUserByUsername) {
+      throw new AppError('User with this username already exists', 400);
+    }
     // Note: username uniqueness is enforced by database constraint
 
     // Hash password
